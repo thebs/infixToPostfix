@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 typedef struct stack{
 	char ch;
@@ -26,7 +27,6 @@ int main(int argc, const char* argv[]){
 	input();
 	beforeOutput();
 	output();
-
 	return 0;
 }
 
@@ -115,7 +115,7 @@ void pushOrCompare(char ch){
 }
 
 void check(char ch){
-	if((ch>='A' && ch<='Z') || (ch>='a' && ch<='z')){
+	if(isalpha(ch)){
 		append(ch);
 	}else{
 		pushOrCompare(ch);
