@@ -22,12 +22,72 @@ void check(char);
 void input();
 void output();
 void beforeOutput();
+void destroy();
 
 int main(int argc, const char* argv[]){
-	input();
-	beforeOutput();
-	output();
+	char chk;
+	printf("\t<<<<<<<<<< Welcome to Infix to Postfix Program >>>>>>>>>>\n");
+	do{
+		printf("\n\tInfix\t: ");
+		input();
+		printf("\t------------------------------------------------------------");
+		beforeOutput();
+		printf("\n\tPostfix\t: ");
+		output();
+		printf("\n\t------------------------------------------------------------");
+		destroy();
+		printf("\n\n");
+		do{
+			printf("\tDo you want to change Infix to Post (y/n)? : ");
+			fflush(stdin);
+			scanf("%c", &chk);
+		}while(!(tolower(chk) == 'y' || tolower(chk) == 'n'));
+		
+	}while(tolower(chk) != 'n');
+	
+	printf("\n\n\t<<<<<<<<<<<<<<<<<<<<<<<< Good Bye >>>>>>>>>>>>>>>>>>>>>>>>\n\n");
 	return 0;
+}
+
+void input(){
+	char ch;
+	do{
+		fflush(stdin);
+		scanf("%c", &ch);
+		if(ch == '\n')
+			printf("\tInfix\t: ");
+	}while(ch == '\n');
+	
+	while(ch != '\n'){
+		check(ch);
+		scanf("%c", &ch);
+	}
+}
+
+void output(){
+	Stack *travel = head;
+	while(travel != NULL){
+		printf("%c", travel->ch);
+		travel = travel->next;
+	}
+}
+
+void destroy(){
+	Stack *travel = head;
+	Stack *del;
+	while(travel != NULL){
+		del = travel;
+		travel = travel->next;
+		free(del);
+	}
+	head = NULL;
+	
+	travel = top;
+	while(travel != NULL){
+		del = travel;
+		travel = travel->next;
+		free(del);
+	}
 }
 
 void beforeOutput(){
@@ -119,22 +179,5 @@ void check(char ch){
 		append(ch);
 	}else{
 		pushOrCompare(ch);
-	}
-}
-
-void input(){
-	char ch;
-	scanf("%c", &ch);
-	while(ch != '\n'){
-		check(ch);
-		scanf("%c", &ch);
-	}
-}
-
-void output(){
-	Stack *travel = head;
-	while(travel != NULL){
-		printf("%c", travel->ch);
-		travel = travel->next;
 	}
 }
