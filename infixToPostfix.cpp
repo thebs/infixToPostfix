@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <conio.h>
 
 typedef struct stack{
 	char ch;
@@ -46,6 +47,8 @@ int main(int argc, const char* argv[]){
 	}while(tolower(chk) != 'n');
 	
 	printf("\n\n\t<<<<<<<<<<<<<<<<<<<<<<<< Good Bye >>>>>>>>>>>>>>>>>>>>>>>>\n\n");
+	
+	getch();
 	return 0;
 }
 
